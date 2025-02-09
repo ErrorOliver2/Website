@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bad Apple</title>
-    <link id="favicon" rel="icon" type="image/png" href="">
     <style>
         * {
             margin: 0;
@@ -38,7 +37,6 @@
         const video = document.getElementById('badApple');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const favicon = document.getElementById('favicon');
 
         // Ensure no controls are visible
         video.removeAttribute('controls');
@@ -54,10 +52,20 @@
             if (!video.paused && !video.ended) {
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                 const faviconURL = canvas.toDataURL('image/png');
-                
-                // Force favicon update by appending a timestamp
-                favicon.href = `${faviconURL}?t=${Date.now()}`;
-                
+
+                // Remove existing favicon
+                let oldFavicon = document.querySelector("link[rel='icon']");
+                if (oldFavicon) oldFavicon.remove();
+
+                // Create a new favicon
+                let newFavicon = document.createElement("link");
+                newFavicon.rel = "icon";
+                newFavicon.type = "image/png";
+                newFavicon.href = faviconURL;
+
+                // Append new favicon to head
+                document.head.appendChild(newFavicon);
+
                 requestAnimationFrame(updateFavicon);
             }
         }
