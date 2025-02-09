@@ -1,0 +1,95 @@
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: "Segoe UI", Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+            /* Any other styling for the title here */
+        }
+
+        #content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #widget {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        iframe {
+            margin: 10px;
+        }
+
+        .social-media-links {
+            margin: 20px;
+        }
+
+        .social-media-links a {
+         /* color: #fff; */ /* Commented this out because users may not know if it's a link or not */
+            text-decoration: none;
+            margin: 10px;
+        }
+
+        .social-media-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-media img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .logo {
+            margin: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            /* Any other styling for the logo and title here */
+        }
+
+        .logo img {
+            vertical-align: middle;
+        }
+        
+        #pretendocentered {
+            text-align: center;
+            display: inline-block; /* Ensure it takes only as much width as needed */
+            margin: 20px auto; /* Center the container horizontally with margin auto */
+        }
+        
+        #walledsections {
+            text-align: left !important; 
+            margin: 20px;
+        }
+        
+        #badgelink {
+            text-align: left;
+            margin: 20px;
+        }
+        
+        code {
+          background-color: gray;
+          color: blue;
+          }
+          
+

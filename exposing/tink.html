@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ErrorOliver's Website</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="../assets/code/style.css">
+</head>
+<body>
+    <div id="content">
+      <a href="../index.html">Home</a><br>
+        <h1>Tink</h1>
+        <p>She has done many bad things. She used to be called Jade and earlier in 2023, Crystal.</p><br>
+        
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/1.png" alt="Asking for a shoutout, begging.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/2.png" alt="Giving ROBLOX password to me to give robux to her, begging.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/3.png" alt="Acts innocent for Nitro, begging.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/4.png" alt="She says nobody is talking to her.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/5.png" alt="She calls my ADHD a problem.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/6.png" alt="She believes due to my ADHD, I have weird friends.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/7.png" alt="Asking for a website, begging.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/8.png" alt="Asking for Nitro again, begging.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/9.png" alt="Begging for call.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/10.png" alt="NSFW text.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/11.png" alt="NSFW text again.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/12.png" alt="Asks to be called Darling...">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/13.png" alt="She says I 'fuck' discord.">
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/14.png" alt="She says she's wet.">
+        <!-- Custom made button, will always be censored if no JS is present -->
+        <img id="toggle-image" src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/15_censored.png" alt="NSFW GIF. The GIF with movement is a lot more NSFW, though.">
+          <button id="toggle-button">Toggle Censored/Uncensored</button>
+        <!-- Custom made button end -->
+        <img src="https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/16.png" alt="Accuses me of liking someone, red flag.">
+    </div>
+    
+    <script>
+    const toggleButton = document.getElementById('toggle-button');
+    const toggleImage = document.getElementById('toggle-image');
+
+    // URLs for the censored and uncensored images
+    const censoredSrc = "https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/15_censored.png";
+    const uncensoredSrc = "https://gitlab.com/ErrorOliver/erroroliver/-/raw/main/exposing/tink/15_uncensored.png";
+
+    // Initialize the current state
+    let isCensored = true;
+
+    // Toggle the image when the button is clicked
+    toggleButton.addEventListener('click', () => {
+      isCensored = !isCensored; // Toggle the state
+      toggleImage.src = isCensored ? censoredSrc : uncensoredSrc;
+    });
+  </script>
+</body>
+</html>
