@@ -59,23 +59,27 @@
             }
         }
 
+        function waitForFirstFrame() {
+            if (video.readyState >= 2) { // Ensure a frame is available
+                updateFavicon();
+            } else {
+                requestAnimationFrame(waitForFirstFrame);
+            }
+        }
+
         video.play().then(() => {
             video.style.display = 'block'; // Show if autoplay works
-            setTimeout(updateFavicon, 100); // Delay to avoid initial white frame
+            waitForFirstFrame(); // Wait for a real frame before setting the favicon
         }).catch(() => {
             // If autoplay fails, require user interaction to start
             video.removeAttribute('autoplay');
             document.body.addEventListener('click', () => {
                 video.style.display = 'block';
                 video.play();
-                setTimeout(updateFavicon, 100); // Delay to avoid initial white frame
+                waitForFirstFrame(); // Ensure we get a real frame before updating the favicon
             }, { once: true });
         });
-
-        video.addEventListener('play', () => {
-            setTimeout(updateFavicon, 100); // Ensure the first frame is captured
-        });
-
     </script>
 </body>
 </html>
+@ErrorOliver its tomfoolery
