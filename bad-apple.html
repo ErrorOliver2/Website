@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bad Apple</title>
     <style>
-        body {
-            background-color: black;
+        * {
             margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        html, body {
+            background-color: black;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
         video {
-            max-width: 100%;
-            height: auto;
-            display: none; /* Hide video until user interaction if autoplay fails */
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            display: none;
         }
     </style>
 </head>
