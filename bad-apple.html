@@ -16,17 +16,27 @@
         video {
             max-width: 100%;
             height: auto;
+            display: none; /* Hide video until user interaction if autoplay fails */
         }
     </style>
 </head>
 <body>
-    <video id="badApple" autoplay muted playsinline>
+    <video id="badApple" controls disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback">
         <source src="https://ia801608.us.archive.org/17/items/bad-apple-resources/bad_apple%401080p.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <script>
-        document.getElementById('badApple').addEventListener('error', function() {
-            this.controls = true;
+        const video = document.getElementById('badApple');
+
+        // Try to autoplay with audio
+        video.play().then(() => {
+            video.style.display = 'block'; // Show if autoplay works
+        }).catch(() => {
+            // If autoplay fails, require user interaction to start
+            document.body.addEventListener('click', () => {
+                video.style.display = 'block';
+                video.play();
+            }, { once: true });
         });
     </script>
 </body>
