@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST Bad Apple</title>
+    <title>test 2 Bad Apple</title>
     <style>
         * {
             margin: 0;
@@ -23,7 +23,7 @@
             height: 100vh;
             object-fit: cover;
             display: none;
-            pointer-events: none; /* Prevent interactions */
+            pointer-events: none;
         }
     </style>
 </head>
@@ -38,43 +38,37 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Ensure no controls are visible
         video.removeAttribute('controls');
         video.setAttribute('disablePictureInPicture', '');
         video.setAttribute('controlsList', 'nodownload nofullscreen noremoteplayback');
 
         video.addEventListener('loadeddata', () => {
-            canvas.width = 64;  // Small size for favicon
+            canvas.width = 64;  
             canvas.height = 64;
         });
 
         function updateFavicon() {
             if (!video.paused && !video.ended) {
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const faviconURL = canvas.toDataURL('image/png');
+                const faviconURL = canvas.toDataURL("image/png");
 
-                // Remove existing favicon
-                let oldFavicon = document.querySelector("link[rel='icon']");
-                if (oldFavicon) oldFavicon.remove();
+                const favicon = document.createElement("link");
+                favicon.rel = "icon";
+                favicon.type = "image/png";
+                favicon.href = faviconURL;
 
-                // Create a new favicon
-                let newFavicon = document.createElement("link");
-                newFavicon.rel = "icon";
-                newFavicon.type = "image/png";
-                newFavicon.href = faviconURL;
-
-                // Append new favicon to head
-                document.head.appendChild(newFavicon);
-
+                // Force browser to replace favicon
+                document.head.querySelectorAll("link[rel='icon']").forEach(el => el.remove());
+                document.head.appendChild(favicon);
+                
                 requestAnimationFrame(updateFavicon);
             }
         }
 
         video.play().then(() => {
-            video.style.display = 'block'; // Show if autoplay works
-            updateFavicon(); // Start updating favicon
+            video.style.display = 'block';
+            updateFavicon();
         }).catch(() => {
-            // If autoplay fails, require user interaction to start
             video.removeAttribute('autoplay');
             document.body.addEventListener('click', () => {
                 video.style.display = 'block';
