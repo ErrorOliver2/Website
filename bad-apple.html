@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bad Apple</title>
+    <link id="favicon" rel="icon" type="image/png" href="">
     <style>
         * {
             margin: 0;
@@ -32,23 +33,42 @@
         <source src="https://ia801608.us.archive.org/17/items/bad-apple-resources/bad_apple%401080p.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
+    <canvas id="canvas" style="display: none;"></canvas>
     <script>
         const video = document.getElementById('badApple');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const favicon = document.getElementById('favicon');
 
         // Ensure no controls are visible
         video.removeAttribute('controls');
         video.setAttribute('disablePictureInPicture', '');
         video.setAttribute('controlsList', 'nodownload nofullscreen noremoteplayback');
 
-        // Try to autoplay with audio
+        video.addEventListener('loadeddata', () => {
+            canvas.width = 64;  // Small size for favicon
+            canvas.height = 64;
+        });
+
+        function updateFavicon() {
+            if (!video.paused && !video.ended) {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const faviconURL = canvas.toDataURL('image/png');
+                favicon.href = faviconURL;
+                requestAnimationFrame(updateFavicon);
+            }
+        }
+
         video.play().then(() => {
             video.style.display = 'block'; // Show if autoplay works
+            updateFavicon(); // Start updating favicon
         }).catch(() => {
             // If autoplay fails, require user interaction to start
             video.removeAttribute('autoplay');
             document.body.addEventListener('click', () => {
                 video.style.display = 'block';
                 video.play();
+                updateFavicon();
             }, { once: true });
         });
     </script>
