@@ -61,16 +61,21 @@
 
         video.play().then(() => {
             video.style.display = 'block'; // Show if autoplay works
-            updateFavicon(); // Start updating favicon
+            setTimeout(updateFavicon, 100); // Delay to avoid initial white frame
         }).catch(() => {
             // If autoplay fails, require user interaction to start
             video.removeAttribute('autoplay');
             document.body.addEventListener('click', () => {
                 video.style.display = 'block';
                 video.play();
-                updateFavicon();
+                setTimeout(updateFavicon, 100); // Delay to avoid initial white frame
             }, { once: true });
         });
+
+        video.addEventListener('play', () => {
+            setTimeout(updateFavicon, 100); // Ensure the first frame is captured
+        });
+
     </script>
 </body>
 </html>
