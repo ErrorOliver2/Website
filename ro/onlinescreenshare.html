@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="theme-color" content="#08C988">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Online Screen Share" />
+<title>Free Online Screen Share</title>
+<meta name="Description" content="Free Screen Sharing using your browser. No Signup required, Nothing to install. Uses secure 'direct' peer to peer connection">
+<meta name="keywords" content="Free Online Screen Sharing">            
+<link rel="canonical" href="https://onlinescreenshare.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<link rel="shortcut icon" href="https://onlinescreenshare.com/./img/onlinescreenshare.png">
+<link rel="stylesheet" href="https://onlinescreenshare.com/./css/ccsiteV6.css">
+<style>
+	img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+	video {
+		height: 500px;
+		width: 100%;
+		cursor: default;
+		border: 1px solid #d3d3d3;
+	}
+</style>
+<!--Analytics-->
+</head>
+<body>
+        <article id="ArticlePage" class="contentPage cover" style="margin-top: 40px;">
+            <div class="intro" style="max-width: 47.625rem; margin: 0 auto; text-align:center">
+                <div class="wrap"><h1 style="margin: 3.5rem 0 0.5rem 0;">Free Online Screen Share</h1></div>
+                <p>Simple browser based screen sharing between 2 people</p>
+                <br />
+                <div id="peerA">
+                  <button id="share-button" class="write1" style="font-family: Arial;" rel="nofollow">Share my screen now</button>
+                  <br>
+				  <p>or</p>
+				  <p>
+					<input type="text" id="meeting-id" value="" placeholder="Enter share code">
+					<button id="join-meeting-button" rel="nofollow">Join meeting</button>
+				  </p>
+				  <br>
+                </div>
+            </div>
+        </article>
+
+    <div class="wrapper" style="margin-top: 0px;">
+        <div class="ColB">
+                <nav class="header">
+                    <div class="left" style="height:35px;">
+                        <a href="https://onlinescreenshare.com"><p data-size="13px" class="logo-text" title="Home">Online Screen Share</p> </a>
+                    </div>
+                    <div class="right">
+                    </div>
+                </nav>
+            <div id="frame">
+                <article id="ArticlePage" class="contentPage bluelinks giantfonts">
+                        
+                        <div style="text-align: center;">
+                            <div id="page1">
+                              <div id="info" style="display: none;">
+                                <p id="meeting-room" style="margin: 0px;"></p>
+                                <p id="meeting-url" style="margin: 0px;"></p>
+                              </div>
+                              <br><br>
+                              <video id="video" controls autoplay playsinline muted>
+                                Your browser does not support the Video element.
+                              </video>
+                            </div>
+                      </div>
+                      <br />
+
+                    <h2>How to start a screen sharing session</h2>
+                    <ul>
+                        <li>Click on the "Share my screen" button</li>
+                        <li>Select what you want to share: (Chrome tab / Application / Entire Screen), make sure to click on the actual "tile", so the "share" button is enabled
+                          <img src="https://onlinescreenshare.com/./img/screen-share-steps.jpg" />
+                        </li>
+                        <li>Call your receiver and share the 9 digit meeting code after they login to onlinescreenshare.com</li>
+                        <li>Alternatively, you can copy and share the meeting URL with the recipient</li>
+                    </ul>
+
+                    <h2>Privacy policy</h2>
+                    <ul>
+                        <li>Your video stream is encrypted and sent "directly" to the receiver using WebRTC "peer-2-peer" technology that's literally built right into everyone's browser. Our servers cant see your video streams</li>
+                        <li>Our servers are involved only in the initial "handshake" phase</li>
+                        <li>We don't send a single bit about your input data to our servers</li>
+                    </ul>
+                    <h2>Terms of use</h2>
+                    <ul>
+                        <li>No usage limits: You do not need an account to use our tools, and they are completely free of charge. Feel free to use them as much as you want.</li>
+                        <li>Liability: We are not liable for any actions you may take using our tools, and we offer no warranty or guarantee of any kind.</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+	//event handlers
+	document
+		.getElementById('join-meeting-button')
+		.addEventListener('click', async () => {
+			window.location = location.href.split('#')[0] + '#' + document.getElementById('meeting-id').value.replaceAll(' ','');    
+			window.location.reload();
+		})
+	const _localVideo = document.getElementById('video');
+
+	let peer = '';
+	if (!document.location.hash) {
+      document.location =
+        document.location.toString() + '#' + (Math.random() * 100).toString().replace('.', '').substring(0,9);
+		peer='pc1';
+    }
+    else
+    {
+      document.getElementById('peerA').style.display = 'none';
+	  document.getElementById('info').style.display = 'block';
+      document.getElementById('video').setAttribute('poster','https://onlinescreenshare.com/./img/loading.gif');
+	  peer='pc2';
+    }
+	const _room = document.location.hash.substring(1);
+	document.getElementById('meeting-room').innerText = 'Share code:  ' + _room.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    document.getElementById('meeting-url').innerText = 'Invite link: https://onlinescreenshare.com/#' + _room
+</script>
+<script src="https://onlinescreenshare.com/./js/ably.min-1.js"></script>
+<script>
+	'use strict';
+	//try to use google stun servers
+	var iceServers = [{
+        'urls': [
+            'stun:stun.l.google.com:19302',
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+			'stun:stun3.l.google.com:19302',
+			'stun:stun4.l.google.com:19302',
+			'stun:relay.metered.ca:80'
+        ]
+	}];
+	iceServers = {
+		iceServers: iceServers,
+		iceTransportPolicy: 'all',
+		bundlePolicy: 'max-bundle',
+		iceCandidatePoolSize: 0
+	};
+	if (window.chrome) { //if chrome
+		iceServers = {
+			iceServers: iceServers.iceServers
+		};
+	}
+
+	let _stream;
+	const channel = ably.channels.get(_room);
+
+	if(peer=='pc1')
+	{
+		channel.subscribe('join', (message) => {
+			initBroadcasting();
+		});
+
+		channel.subscribe('readyToReceive', (message) => {
+			startBroadcasting(message);
+		});
+	} 
+
+	if(peer=='pc2')
+	{
+		channel.publish('join', _room);
+
+		channel.subscribe('readyToBroadcast', (message) => {
+			initReceiving(message);
+		});
+	}
+	
+
+	let pc1;
+	let pc2;
+	const offerOptions = {
+		offerToReceiveAudio: 0,
+		offerToReceiveVideo: 1
+	};
+
+	document.getElementById('share-button').addEventListener('click', start);
+	async function start() {
+		document.getElementById('info').style.display = 'block';
+		try {
+			if(navigator.mediaDevices.getDisplayMedia) {
+				_stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+            }
+            else if(navigator.getDisplayMedia) {
+				_stream = await navigator.getDisplayMedia({ video: true });
+            }
+			console.log('Received local stream');
+			_localVideo.srcObject = _stream;
+      		_localVideo.play() //on A: display localstream
+
+		} catch (e) {
+			alert(`getUserMedia() error: ${e.name}`);
+		}
+	}
+
+	async function initBroadcasting() {
+		console.log('Starting call');
+		pc1 = new RTCPeerConnection(iceServers);
+		console.log('Created local peer connection object pc1');
+		pc1.addEventListener('icecandidate', e => onIceCandidate(e, 'pc1'));
+
+		_stream.getTracks().forEach(track => pc1.addTrack(track, _stream));
+
+		try {
+			console.log('pc1 createOffer start');
+			const offer = await pc1.createOffer(offerOptions);
+			console.log('pc1 setLocalDescription start');
+			await pc1.setLocalDescription(offer);
+			await channel.publish('readyToBroadcast', {content:offer});
+		} catch (e) {
+			console.log(`Failed to create session description: ${e.toString()}`);
+		}
+	}
+
+	async function initReceiving(msg) {
+		pc2 = new RTCPeerConnection(iceServers);
+		console.log('Created remote peer connection object pc2');
+		pc2.addEventListener('icecandidate', e => onIceCandidate(e, 'pc2'));
+		pc2.addEventListener('track', gotRemoteStream);
+
+		console.log('pc2 setRemoteDescription start');
+		try {
+			await pc2.setRemoteDescription(msg.data.content);
+		} catch (e) {
+			console.log(`Failed to set session description: ${e.toString()}`);
+		}
+
+		console.log('pc2 createAnswer start');
+		try {
+			const answer = await pc2.createAnswer();
+			console.log('pc2 setLocalDescription start');
+			await pc2.setLocalDescription(answer);
+			await channel.publish('readyToReceive', {content:answer});
+		} catch (e) {
+			console.log(`initReceiving: Failed to set session description: ${e.toString()}`);
+		}
+	}
+
+	function gotRemoteStream(e) {
+		if (_localVideo.srcObject !== e.streams[e.streams.length-1]) {
+			_localVideo.srcObject = e.streams[e.streams.length-1];
+			_localVideo.play();
+			console.log('pc2 received remote stream');
+		}
+	}
+
+	async function startBroadcasting(msg) {
+		console.log('pc1 setRemoteDescription start');
+		try {
+			await pc1.setRemoteDescription(msg.data.content);
+		} catch (e) {
+			console.log(`Failed to set session description: ${e.toString()}`);
+		}
+	}
+
+	async function onIceCandidate(event, type) {
+		if(event.candidate===null)
+			return;
+		await channel.publish('ice', {
+			type: type,
+			candidate: JSON.stringify(event.candidate)
+		});
+	}
+
+	channel.subscribe('ice', (msg) => {
+		var data = msg.data;
+		if(data.type===peer) //exclude me from my own message
+			return;
+		if (data.type == 'pc1')
+			pc2.addIceCandidate(JSON.parse(data.candidate));
+		else if (data.type == 'pc2')
+			pc1.addIceCandidate(JSON.parse(data.candidate));
+	});
+
+	function hangup() {
+		console.log('Ending call');
+		if(pc1) pc1.close();
+		if(pc2) pc2.close();
+		pc1 = null;
+		pc2 = null;
+		if (_stream) {
+			_stream.getTracks().forEach(function (track) {
+				track.stop();
+			});
+		}
+		_localVideo.srcObject = null;
+		ably.close();
+	}
+
+	window.addEventListener("beforeunload", hangup);
+</script>
+</html>
