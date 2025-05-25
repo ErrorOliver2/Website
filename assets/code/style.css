@@ -10,7 +10,6 @@
         h1 {
             font-size: 36px;
             margin: 0;
-            /* Any other styling for the title here */
         }
 
         #content {
@@ -34,7 +33,6 @@
         }
 
         .social-media-links a {
-         /* color: #fff; */ /* Commented this out because users may not know if it's a link or not */
             text-decoration: none;
             margin: 10px;
         }
@@ -64,7 +62,6 @@
             margin: 20px;
             display: inline-block;
             vertical-align: middle;
-            /* Any other styling for the logo and title here */
         }
 
         .logo img {
@@ -90,6 +87,4 @@
         code {
           background-color: gray;
           color: blue;
-          }
-          
-
+        }
