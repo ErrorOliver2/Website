@@ -1,7 +1,8 @@
 # ErrorOliver's Website
-Yeah, this is my amazing website.
+This is my website.
 
-Thanks to Twisty Nado for hosting the new website.
+Thanks to Twisty Nado for getting the domain for the website.
 
-[Current Website](https://example.org)
+[Current Website](https://ErrorOliver.lol)
+
 [Old Website](https://ErrorOliver.neocities.org)
