@@ -19,7 +19,9 @@
 
         h6 {
             font-size: 36px;
-            margin: 0;
+            margin: 0;        /* removes outer margins */
+            line-height: 1;   /* tightens the text box */
+            padding: 0;       /* ensures no extra padding */
         }
 
         #content {
