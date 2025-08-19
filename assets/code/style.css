@@ -17,6 +17,11 @@
             margin: 0;
         }
 
+        h6 {
+            font-size: 36px;
+            margin: 0;
+        }
+
         #content {
             max-width: 800px;
             margin: 0 auto;
