@@ -18,11 +18,13 @@
         }
 
         h6 {
-            font-size: 36px;
-            margin: 0;        /* removes outer margins */
-            line-height: 1;   /* tightens the text box */
-            padding: 0;       /* ensures no extra padding */
+          font-size: 36px;
+          margin: 0;
+          padding: 0;
+          line-height: 1;   /* or even line-height: 0.9; if still too tall */
+          display: inline-block; /* optional, avoids block-level vertical spacing */
         }
+
 
         #content {
             max-width: 800px;
