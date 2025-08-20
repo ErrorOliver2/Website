@@ -7,7 +7,7 @@
             padding: 0;
         }
 
-        p{
+        p {
           margin: 0;
           padding: 0;
         }
@@ -17,8 +17,8 @@
             margin: 0;
         }
 
-        h6 {
-          font-size: 36px;
+        h5 {
+          /* font-size: 36px; */
           margin: 0;
           padding: 0;
           line-height: 1;   /* or even line-height: 0.9; if still too tall */
