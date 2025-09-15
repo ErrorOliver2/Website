@@ -1,0 +1,9 @@
+tunnel: falcord-tunnel
+credentials-file: /home/liveuser/.cloudflared/f8b1df42-6939-4285-ae20-a12cfdcfda0f.json
+
+ingress:
+  - hostname: falcord.ixchats.com
+    service: http://localhost:443
+  - hostname: signal.falcord.ixchats.com
+    service: http://localhost:443
+  - service: http_status:404
