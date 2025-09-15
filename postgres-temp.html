@@ -1,0 +1,61 @@
+<pre>
+[oliver@sleekpi ~]$ sudo systemctl start postgresql
+Job for postgresql.service failed because the control process exited with error code.
+See "systemctl status postgresql.service" and "journalctl -xeu postgresql.service" for details.
+[oliver@sleekpi ~]$ systemctl status postgresql.service
+× postgresql.service - PostgreSQL database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql.service; enabled; preset: disabled)
+     Active: failed (Result: exit-code) since Mon 2025-09-15 20:21:27 BST; 13s ago
+ Invocation: b1235b75699a41ce8d6d90fc3982593a
+       Docs: man:postgres(1)
+    Process: 5633 ExecStartPre=/usr/bin/postgresql-check-db-dir ${PGROOT}/data (code=exited, status=1/FAILURE)
+        CPU: 162ms
+
+Sep 15 20:21:26 sleekpi systemd[1]: Starting PostgreSQL database server...
+Sep 15 20:21:27 sleekpi postgres[5635]: cat: /var/lib/postgres/data/PG_VERSION: Permission denied
+Sep 15 20:21:27 sleekpi postgres[5636]: cat: /var/lib/postgres/data/PG_VERSION: Permission denied
+Sep 15 20:21:27 sleekpi postgres[5633]: An old version of the database format was found.
+Sep 15 20:21:27 sleekpi postgres[5633]: You need to dump and reload before using PostgreSQL 17.
+Sep 15 20:21:27 sleekpi postgres[5633]: See http://www.postgresql.org/docs/17/static/upgrading.html
+Sep 15 20:21:27 sleekpi systemd[1]: postgresql.service: Control process exited, code=exited, status=1/FAILURE
+Sep 15 20:21:27 sleekpi systemd[1]: postgresql.service: Failed with result 'exit-code'.
+Sep 15 20:21:27 sleekpi systemd[1]: Failed to start PostgreSQL database server.
+[oliver@sleekpi ~]$ journalctl -xeu postgresql.service
+Sep 15 20:21:26 sleekpi systemd[1]: Starting PostgreSQL database server...
+░░ Subject: A start job for unit postgresql.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit postgresql.service has begun execution.
+░░ 
+░░ The job identifier is 1376.
+Sep 15 20:21:27 sleekpi postgres[5635]: cat: /var/lib/postgres/data/PG_VERSION: Permission denied
+Sep 15 20:21:27 sleekpi postgres[5636]: cat: /var/lib/postgres/data/PG_VERSION: Permission denied
+Sep 15 20:21:27 sleekpi postgres[5633]: An old version of the database format was found.
+Sep 15 20:21:27 sleekpi postgres[5633]: You need to dump and reload before using PostgreSQL 17.
+Sep 15 20:21:27 sleekpi postgres[5633]: See http://www.postgresql.org/docs/17/static/upgrading.html
+Sep 15 20:21:27 sleekpi systemd[1]: postgresql.service: Control process exited, code=exited, status=1/FAILURE
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit postgresql.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 1.
+Sep 15 20:21:27 sleekpi systemd[1]: postgresql.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit postgresql.service has entered the 'failed' state with result 'exit-code'.
+Sep 15 20:21:27 sleekpi systemd[1]: Failed to start PostgreSQL database server.
+░░ Subject: A start job for unit postgresql.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit postgresql.service has finished with a failure.
+░░ 
+░░ The job identifier is 1376 and the job result is failed.
+
+[oliver@sleekpi ~]$ 
+</pre>
